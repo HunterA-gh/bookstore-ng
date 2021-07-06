@@ -1,0 +1,47 @@
+<button class="btn btn-info" routerLink="/homepage">Back to Home</button>
+<h1>{{book.name}}</h1>
+
+<img src="{{book.image}}" height="250" width="200">
+
+
+<h3>
+  ISBN: {{book.isbn}}
+</h3>
+<br><br>
+
+<h3>
+  Price: {{book.price | currency}}
+</h3>
+<br><br>
+<h3>
+  Description: {{book.description}}
+</h3>
+
+<br><br>
+<h3>
+  Active: {{book.active}}
+</h3>
+<br><br>
+<h3>
+  Stock: {{book.stock}}
+</h3>
+<br><br>
+<button class="btn btn-success" (click)="editBook()">Edit Book</button>
+<button class="btn btn-danger" (click)="deleteBook()">Delete Book</button>
+<form *ngIf="showEditForm" [formGroup]="editForm">
+  <label for="name">New Name: </label>
+  <input id="name" type="text" formControlName="name"><br>
+  <label for="isbn">New ISBN: </label>
+  <input id="isbn" type="text" formControlName="isbn"><br>
+  <label for="image">New Image Link: </label>
+  <input id="image" type="text" formControlName="image"><br>
+  <label for="description">New Description: </label>
+  <input id="description" type="text" formControlName="description"><br>
+  <label for="price">New Price: </label>
+  <input id="price" type="text" formControlName="price"><br>
+  <label for="stock">New Stock: </label>
+  <input id="stock" type="text" formControlName="stock"><br>
+  <label for="isActive">Active: </label>
+  <input id="isActive" type="checkbox" formControlName="isActive"><br>
+  <button type="submit" (click)="edit()" [disabled]="editForm.invalid">Submit</button>
+</form>

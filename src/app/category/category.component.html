@@ -1,0 +1,52 @@
+<h1>{{category.category}}</h1>
+
+<table class="table">
+  <thead class="thead-light">
+  <tr>
+    <th scope="col"></th>
+    <th scope="col">Title</th>
+    <th scope="col">Description</th>
+    <th scope="col">Price</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr  *ngFor="let book of books">
+    <td><button class="btn btn-light" (click)="onBookClick(book.id)">
+      <img src="{{book.image}}" height="100" width="75">
+    </button></td>
+    <td>{{book.name}}</td>
+    <td>{{book.description}}</td>
+    <td>{{book.price | currency}}</td>
+
+  </tr>
+
+  </tbody>
+</table>
+<button class="btn btn-primary" (click)="addBook()">Add Book</button>
+<button class="btn btn-success" (click)="editCategory()">Edit Category</button>
+<button class="btn btn-danger" (click)="deleteCategory()">Delete Category</button>
+<button class="btn btn-info" routerLink="/homepage">Back to Home</button>
+
+<form *ngIf="showEditForm" [formGroup]="editForm">
+  <label for="name">New Category Name: </label>
+  <input id="name" type="text" formControlName="name">
+  <button type="submit" (click)="edit()" [disabled]="editForm.invalid">Submit</button>
+</form>
+
+<form *ngIf="showAddForm" [formGroup]="addForm">
+  <label for="name2">New Name: </label>
+  <input id="name2" type="text" formControlName="name2"><br>
+  <label for="isbn">New ISBN: </label>
+  <input id="isbn" type="text" formControlName="isbn"><br>
+  <label for="image">New Image Link: </label>
+  <input id="image" type="text" formControlName="image"><br>
+  <label for="description">New Description: </label>
+  <input id="description" type="text" formControlName="description"><br>
+  <label for="price">New Price: </label>
+  <input id="price" type="text" formControlName="price"><br>
+  <label for="stock">New Stock: </label>
+  <input id="stock" type="text" formControlName="stock"><br>
+  <label for="isActive">Active: </label>
+  <input id="isActive" type="checkbox" formControlName="isActive"><br>
+  <button type="submit" (click)="add()" [disabled]="addForm.invalid">Submit</button>
+</form>

@@ -1,0 +1,57 @@
+<nav class="navbar navbar-light bg-light justify-content-between">
+  <a class="navbar-brand">Bookstore</a>
+  <form class="form-inline">
+    <div class="input-group">
+      <input type="search" id="search" class="form-control rounded" name="searchTerm" placeholder="Search for books" [(ngModel)]="searchTerm"/>
+    </div>
+  </form>
+</nav>
+
+<div class="row">
+
+
+  <div class="col-3 text-white bg-secondary">
+
+    <h3 class="text-decoration-underline">Categories</h3>
+    <ul class="list-group" *ngFor="let category of categories">
+      <li class="list-group-item">
+        <button class="btn btn-light" (click)="onCategoryClick(category.id)">{{category.category}}</button>
+      </li>
+    </ul>
+<button class="btn btn-warning" (click)="addCategory()">Add Category</button>
+    <form *ngIf="showAddCategoryForm" [formGroup]="addForm">
+      <label for="name">New Category Name: </label>
+      <input id="name" type="text" formControlName="name">
+      <button type="submit" (click)="add()" [disabled]="addForm.invalid">Submit</button>
+    </form>
+  </div>
+
+  <div class="col-9">
+
+    <table class="table">
+      <thead class="thead-light">
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr  *ngFor="let book of books | search:searchTerm">
+        <td><button class="btn btn-light" (click)="onBookClick(book.id)">
+          <img src="{{book.image}}" height="100" width="75">
+        </button></td>
+        <td>{{book.name}}</td>
+        <td>{{book.description}}</td>
+        <td>{{book.price | currency}}</td>
+
+      </tr>
+
+      </tbody>
+    </table>
+
+
+  </div>
+</div>
+
